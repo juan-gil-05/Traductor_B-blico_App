@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:traductor_biblico/pages/login_page.dart';
 
 import '../models/user.dart';
+import '../repository/firebase_api.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,7 +15,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 
- // final FirebaseApi _firebaseApi = FirebaseApi();
+  final FirebaseApi _firebaseApi = FirebaseApi();
 
   //Variables para el registro del usuario
   final _email = TextEditingController();
