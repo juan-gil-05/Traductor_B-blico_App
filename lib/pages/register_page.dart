@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -36,9 +37,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   //Fnción para guardar el usuario en preferencias compartidas
   void saveUser(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('user', jsonEncode(user));
-    //var result = await _firebaseApi.registerUser(user.email, user.password);
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+    //prefs.setString('user', jsonEncode(user));
+    var result = await _firebaseApi.registerUser(user.email, user.password);
   }
 
   //función al momento de oprimir el boton de registro
