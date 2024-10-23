@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 import 'package:traductor_biblico/pages/login_page.dart';
 
 import '../models/user.dart';
@@ -15,7 +12,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final FirebaseApi _firebaseApi = FirebaseApi();
 
   //Variables para el registro del usuario
@@ -35,25 +31,25 @@ class _RegisterPageState extends State<RegisterPage> {
     ));
   }
 
-  //Fnción para guardar el usuario en preferencias compartidas
+  //Fnción para guardar el usuario en la base de datos
   void saveUser(User user) async {
-    //SharedPreferences prefs = await SharedPreferences.getInstance();
-    //prefs.setString('user', jsonEncode(user));
     var result = await _firebaseApi.registerUser(user.email, user.password);
+    if (result) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    } else {
+      _showMsg("no se registro el usuario");
+    }
   }
 
   //función al momento de oprimir el boton de registro
   void _onRegisterButtonClicked() {
     setState(() {
       // verificamos si los campos de contraseña coinciden y si es el caso, creamos un objeto de la clase User
-      // y lo guardamos en preferencias compartidas
+      // y lo guardamos en la base de datos
       if (_password.text == _reppassword.text) {
         var user = User(_email.text, _password.text);
         saveUser(user);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
-      } else {
-        _showMsg("Las constraseñas deben ser iguales");
       }
     });
   }

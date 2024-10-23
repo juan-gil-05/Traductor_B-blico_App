@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseApi {
@@ -8,10 +7,10 @@ class FirebaseApi {
           .createUserWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
-      print(e.code);
+      print("el error es: ${e.message}");
       return false;
     } catch (e) {
-      print(e);
+      print("error : ${e.toString()}");
       return false;
     }
   }
